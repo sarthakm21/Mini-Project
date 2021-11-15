@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Result Page</title>
+</head>
+<body>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="file" name="excel" accept=".csv" class="" required/>  
+
+        <select id="model" name="model">
+            <option value="classic">Classic LSTM</option>
+            <option value="stacked">Stacked LSTM</option>
+        </select>
+
+        <input type="submit" class="" value="Submit"/>
+    </form>
+</body>
+</html>
