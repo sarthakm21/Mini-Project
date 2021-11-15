@@ -22,14 +22,14 @@ def validate_result(model, model_name, validation_X, validation_y):
 
     R2_score = r2_score(validation_y, predicted)
 
-    plt.plot(validation_y.index, predicted, 'r', label='Predict')
-    plt.plot(validation_y.index, validation_y, 'b', label='Actual')
-    plt.ylabel('Price')
-    plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d'))
-    plt.gca().xaxis.set_major_locator(mdates.MonthLocator())
-    plt.title(model_name + ' Predict vs Actual')
-    plt.legend(loc='upper right')
-    plt.show()
+    # plt.plot(validation_y.index, predicted, 'r', label='Predict')
+    # plt.plot(validation_y.index, validation_y, 'b', label='Actual')
+    # plt.ylabel('Price')
+    # plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d'))
+    # plt.gca().xaxis.set_major_locator(mdates.MonthLocator())
+    # plt.title(model_name + ' Predict vs Actual')
+    # plt.legend(loc='upper right')
+    # plt.show()
 
 
 def stackedLSTM():
@@ -169,7 +169,6 @@ def biDirectionalLSTM():
 
     """# Normalizing the data"""
 
-    from sklearn.preprocessing import MinMaxScaler
     scaler = MinMaxScaler()
     feature_minmax_transform_data = scaler.fit_transform(test[feature_columns])
     feature_minmax_transform = pd.DataFrame(
