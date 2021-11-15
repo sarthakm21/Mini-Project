@@ -1,18 +1,9 @@
 # package imports
-from keras.layers import LSTM, Dense, Dropout
 from pyexcel_xlsx import get_data as xlsx_get
-from sklearn import linear_model
-import matplotlib.dates as mdates
-from sklearn.metrics import mean_squared_error, r2_score
-from sklearn.model_selection import TimeSeriesSplit
-from sklearn.preprocessing import MinMaxScaler
-import matplotlib
-import matplotlib.pyplot as plt
-import pandas as pd
-import numpy as np
 
 # django imports
 from django.shortcuts import render
+from core.model import stackedLSTM, biDirectionalLSTM, classicLSTM
 
 # Create your views here.
 
