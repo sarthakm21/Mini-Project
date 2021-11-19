@@ -2,60 +2,203 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Result Page</title>
-    <script
-  src="https://code.jquery.com/jquery-3.6.0.min.js"
-  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
-  crossorigin="anonymous"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-</head>
-<body>
-  <div class="container" style="padding: 50px 100px;">
-    <form method="post" id="form" enctype="multipart/form-data">
-      {% csrf_token %}
-      <input type="file" name="excel" accept=".csv" class="" required/> 
-      <br><br>
-      <select id="model" name="model">
-          <option value="classic">Classic LSTM</option>
-          <option value="stacked">Stacked LSTM</option>
-          <option value="bidirectional">Bidirectional LSTM</option>
-      </select>
-      <br><br>
-      <select class="form-select" name="features" id="select" multiple aria-label="multiple select example" style="max-width: 200px;" required>
-          <option value="Open">Open</option>
-          <option value="High">High</option>
-          <option value="Low">Low</option>
-          <option value="Last">Last</option>
-          <option value="Close">Close</option>
-          <option value="VWAP">VWAP</option>
-          <option value="Volume">Volume</option>
-      </select>
-      <input type="hidden" name="feature_list" id="feature_list"/>  
-      <br><br>
-      <input type="submit" class="" value="Submit"/>
-  </form>
-  <br><br>
-  <strong>Result:</strong>
-  <br><br>
-  "score_lstm": {{score_lstm}},
-  <br><br>
-  "r2_train": {{r2_train}},
-  <br><br>
-  "r2_test": {{r2_test}}
-  <br><br>
-  <img src = "{% static 'graph.png' %}" height="500" width="500" class="">
-  </div>
-    <script>
-      $('#form').submit(function() {
-        let x = $('#select').val();
-        $("#feature_list").val(x);
-    return true; 
-});
-</script>
-</body>
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Result Page</title>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css2?family=Nunito&family=Open+Sans&display=swap" rel="stylesheet">
+
+        <!-- Styles.css -->
+        <link rel="stylesheet" href="../../static/css/styles.css" type="text/css">
+
+        <!-- Icons -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
+    </head>
+
+    <body>
+        <header id="header" class="header fixed-top">
+            <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+                <a href="index.html" class="logo d-flex align-items-center">
+                    <img src="../../static/stock.png" alt="" />
+                    <span>LSTM Variants</span>
+                </a>
+                <nav id="navbar" class="navbar">
+                    <ul>
+                        <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+                        <li><a class="getstarted scrollto" href="#about">Get Started</a></li>
+                    </ul>
+                    <i class="bi bi-list mobile-nav-toggle"></i>
+                </nav>
+            </div>
+        </header>
+        <section id="hero" class="hero d-flex align-items-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 d-flex flex-column justify-content-center">
+                        <h1 data-aos="fade-up">
+                            Compare stock prices predicted by different LSTM Variants
+                        </h1>
+                        <h2 data-aos="fade-up" data-aos-delay="400">
+                            Choose different features and see results and accuracy of various models using graph and
+                            stats
+                        </h2>
+                        <div data-aos="fade-up" data-aos-delay="600">
+                            <div class="text-center text-lg-start">
+                                <a href=""
+                                    class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
+                                    <span>Get Started</span>
+                                    <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 hero-img" data-aos="zoom-out" data-aos-delay="200">
+                        <img src="../../static/hero-img.png" class="img-fluid" alt="" />
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="values" class="values">
+
+            <div class="container" data-aos="fade-up">
+
+                <header class="section-header">
+                    <h2>Introduction</h2>
+                    <p>Long Short Term Memory (LSTM)</p>
+                </header>
+
+                <div class="row">
+
+                    <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
+                        <div class="box">
+                            <img src="../../static/values-1.png" class="img-fluid" alt="">
+                            <h3>Stacked LSTM</h3>
+                            <p>An LSTM model comprised of multiple LSTM layers. An LSTM layer above provides a sequence
+                                output rather than a single
+                                value output to the LSTM layer below.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="400">
+                        <div class="box">
+                            <img src="../../static/second.png" class="img-fluid mt-2" alt="">
+
+                            <h3>Classic LSTM</h3>
+                            <p>The classic LSTM architecture is characterized by a persistent linear cell state
+                                surrounded by non-linear layers feeding
+                                input and parsing output from it. Concretely the cell state works in concert with 4
+                                gating layers; forget, (2x) input, and output gates.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="600">
+                        <div class="box">
+                            <img src="../../static/values-3.png" class="img-fluid" alt="">
+                            <h3>Bidirectional LSTM</h3>
+                            <p>A Bidirectional LSTM, or biLSTM, is a sequence processing model that consists of two
+                                LSTMs: one taking the input in a
+                                forward direction, and the other in a backwards direction.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <div class="row justify-content-center m-4">
+            <header class="section-header">
+                <h2> Description</h2>
+                <p class="w-75 mx-auto"> Select CSV file, LSTM Variant and features to generate graph for predicted
+                    price of
+                    the given stock
+                </p>
+            </header>
+            <div class="col-8  shadow-lg p-5 rounded">
+                <form method="post" id="form" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <h5>Select the CSV file of a particular company</h5>
+                    <div class="input-group mb-4">
+                        <input type="file" name="excel" accept=".csv" required class="form-control"
+                            id="inputGroupFile02" />
+                        <label class="input-group-text" for="inputGroupFile02">Upload</label>
+                    </div>
+
+                    <h5>Select LSTM Variant</h5>
+                    <div class="input-group mb-4">
+                        <select class="form-select" id="model" name="model"
+                            aria-label="Example select with button addon">
+                            <option selected>Choose Variant...</option>
+                            <option value="classic">Classic LSTM</option>
+                            <option value="stacked">Stacked LSTM</option>
+                            <option value="bidirectional">
+                                Bidirectional LSTM
+                            </option>
+                        </select>
+                    </div>
+
+                    <h5>Select Features</h5>
+                    <select class="form-select" name="features" id="select" multiple
+                        aria-label="multiple select example" required>
+                        <option value="Open">Open</option>
+                        <option value="High">High</option>
+                        <option value="Low">Low</option>
+                        <option value="Last">Last</option>
+                        <option value="Close">Close</option>
+                        <option value="VWAP">VWAP</option>
+                        <option value="Volume">Volume</option>
+                    </select>
+                    <input type="hidden" name="feature_list" id="feature_list" />
+                    <br><br>
+                    <!-- <input type="submit" class="" value="Submit" /> -->
+                    <input class="btn btn-outline-primary mb-3" type="submit" value="Submit" />
+                </form>
+
+                <div class="d-flex justify-content-center mb-2">
+                    <h3>Result</h3>
+                </div>
+                <div class="result d-flex flex-row justify-content-between">
+                    <div>
+                        "score_lstm": {{score_lstm}},
+                    </div>
+                    <div>
+                        "r2_train": {{r2_train}},
+                    </div>
+                    <div>
+                        "r2_test": {{r2_test}}
+                    </div>
+                </div>
+                <div>
+                    <img src="{% static 'graph.png' %}" height="500" width="800" class="graph_generated">
+                </div>
+            </div>
+        </div>
+
+        <script>
+            $('#form').submit(function () {
+                let x = $('#select').val();
+                $("#feature_list").val(x);
+                return true;
+            });
+        </script>
+        <script src="../../static/js/main.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+            crossorigin="anonymous"></script>
+    </body>
+
 </html>
