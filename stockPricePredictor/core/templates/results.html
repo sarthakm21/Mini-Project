@@ -7,28 +7,55 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Result Page</title>
+    <script
+  src="https://code.jquery.com/jquery-3.6.0.min.js"
+  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+  crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </head>
 <body>
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <input type="file" name="excel" accept=".csv" class="" required/>  
-
-        <select id="model" name="model">
-            <option value="classic">Classic LSTM</option>
-            <option value="stacked">Stacked LSTM</option>
-            <option value="bidirectional">Bidirectional LSTM</option>
-        </select>
-        <input type="submit" class="" value="Submit"/>
-    </form>
-    <br><br>
-    Result:
-    <br><br>
-    "score_lstm": {{score_lstm}},
-    <br><br>
-    "r2_train": {{r2_train}},
-    <br><br>
-    "r2_test": {{r2_test}}
-    <br><br>
-    <img src = "{% static 'graph.png' %}" height="500" width="500" class="">
+  <div class="container" style="padding: 50px 100px;">
+    <form method="post" id="form" enctype="multipart/form-data">
+      {% csrf_token %}
+      <input type="file" name="excel" accept=".csv" class="" required/> 
+      <br><br>
+      <select id="model" name="model">
+          <option value="classic">Classic LSTM</option>
+          <option value="stacked">Stacked LSTM</option>
+          <option value="bidirectional">Bidirectional LSTM</option>
+      </select>
+      <br><br>
+      <select class="form-select" name="features" id="select" multiple aria-label="multiple select example" style="max-width: 200px;" required>
+          <option value="Open">Open</option>
+          <option value="High">High</option>
+          <option value="Low">Low</option>
+          <option value="Last">Last</option>
+          <option value="Close">Close</option>
+          <option value="VWAP">VWAP</option>
+          <option value="Volume">Volume</option>
+      </select>
+      <input type="hidden" name="feature_list" id="feature_list"/>  
+      <br><br>
+      <input type="submit" class="" value="Submit"/>
+  </form>
+  <br><br>
+  <strong>Result:</strong>
+  <br><br>
+  "score_lstm": {{score_lstm}},
+  <br><br>
+  "r2_train": {{r2_train}},
+  <br><br>
+  "r2_test": {{r2_test}}
+  <br><br>
+  <img src = "{% static 'graph.png' %}" height="500" width="500" class="">
+  </div>
+    <script>
+      $('#form').submit(function() {
+        let x = $('#select').val();
+        $("#feature_list").val(x);
+    return true; 
+});
+</script>
 </body>
 </html>

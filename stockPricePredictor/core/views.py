@@ -13,6 +13,7 @@ def getResults(request):
     if request.method == "POST":
         data = request.FILES.get('excel').read().decode('UTF-8')
         model = request.POST.get('model')
+        features = request.POST.get('feature_list').split(',')
 
         # open the file in the write mode
         with open('csv_file.csv', 'w', encoding='UTF8') as f:
@@ -23,10 +24,10 @@ def getResults(request):
                 writer.writerow(column)
 
         if model == "stacked":
-            fields = stackedLSTM("csv_file.csv")
+            fields = stackedLSTM("csv_file.csv",features)
         elif model == "bidirectional":
-            fields = biDirectionalLSTM("csv_file.csv")
+            fields = biDirectionalLSTM("csv_file.csv", features)
         else:
-            fields = classicLSTM("csv_file.csv")
+            fields = classicLSTM("csv_file.csv", features)
 
     return render(request, 'results.html', fields)

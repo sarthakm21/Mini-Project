@@ -31,7 +31,7 @@ def validate_result(model, model_name, validation_X, validation_y):
     # plt.show()
 
 
-def stackedLSTM(csv):
+def stackedLSTM(csv, feature_columns):
     print("Stacked LSTM")
     df_final = pd.read_csv(csv, na_values=[
         'null'], index_col='Date', parse_dates=True, infer_datetime_format=True)
@@ -49,7 +49,7 @@ def stackedLSTM(csv):
     target_adj_close = pd.DataFrame(test['Close'])
 
     # selecting Feature Columns
-    feature_columns = ['Open', 'High', 'Low', 'Volume']
+    # feature_columns = ['Open', 'High', 'Low', 'Volume']
 
     """# Normalizing the data"""
 
@@ -148,7 +148,7 @@ def stackedLSTM(csv):
     }
 
 
-def biDirectionalLSTM(csv):
+def biDirectionalLSTM(csv, feature_columns):
     print("BiDirectional LSTM")
 
     df_final = pd.read_csv(csv, na_values=[
@@ -167,7 +167,7 @@ def biDirectionalLSTM(csv):
     target_adj_close = pd.DataFrame(test['Close'])
 
     # selecting Feature Columns
-    feature_columns = ['Open', 'High', 'Low', 'Volume']
+    # feature_columns = ['Open', 'High', 'Low', 'Volume']
 
     """# Normalizing the data"""
 
@@ -263,7 +263,7 @@ def biDirectionalLSTM(csv):
     }
 
 
-def classicLSTM(csv):
+def classicLSTM(csv, feature_columns):
     print("Classic LSTM")
 
     df_final = pd.read_csv(csv, na_values=[
@@ -282,7 +282,7 @@ def classicLSTM(csv):
     target_adj_close = pd.DataFrame(test['Close'])
 
     # selecting Feature Columns
-    feature_columns = ['Open', 'High', 'Low', 'Volume']
+    # feature_columns = ['Open', 'High', 'Low', 'Volume']
 
     """# Normalizing the data"""
 
