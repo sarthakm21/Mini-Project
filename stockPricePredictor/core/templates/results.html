@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,9 +16,19 @@
         <select id="model" name="model">
             <option value="classic">Classic LSTM</option>
             <option value="stacked">Stacked LSTM</option>
+            <option value="bidirectional">Bidirectional LSTM</option>
         </select>
-
         <input type="submit" class="" value="Submit"/>
     </form>
+    <br><br>
+    Result:
+    <br><br>
+    "score_lstm": {{score_lstm}},
+    <br><br>
+    "r2_train": {{r2_train}},
+    <br><br>
+    "r2_test": {{r2_test}}
+    <br><br>
+    <img src = "{% static 'graph.png' %}" height="500" width="500" class="">
 </body>
 </html>

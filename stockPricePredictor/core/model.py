@@ -15,7 +15,6 @@ import keras.backend as K
 from sklearn.tree import DecisionTreeRegressor
 from sklearn import linear_model
 
-
 def validate_result(model, model_name, validation_X, validation_y):
     predicted = model.predict(validation_X)
     RSME_score = np.sqrt(mean_squared_error(validation_y, predicted))
@@ -32,17 +31,18 @@ def validate_result(model, model_name, validation_X, validation_y):
     # plt.show()
 
 
-def stackedLSTM():
-    df_final = pd.read_csv("CIPLA.csv", na_values=[
+def stackedLSTM(csv):
+    print("Stacked LSTM")
+    df_final = pd.read_csv(csv, na_values=[
         'null'], index_col='Date', parse_dates=True, infer_datetime_format=True)
 
-    df_final.head()
+    # df_final.head()
 
-    df_final.shape
+    # df_final.shape
 
-    df_final.describe()
+    # df_final.describe()
 
-    df_final.isnull().values.any()
+    # df_final.isnull().valueTs.any()
 
     test = df_final
     # Target column
@@ -78,13 +78,13 @@ def stackedLSTM():
         y_train, y_test = target_adj_close[:len(train_index)].values.ravel(
         ), target_adj_close[len(train_index): (len(train_index)+len(test_index))].values.ravel()
 
-    X_train.shape
+    # X_train.shape
 
-    X_test.shape
+    # X_test.shape
 
-    y_train.shape
+    # y_train.shape
 
-    y_test.shape
+    # y_test.shape
 
     """# Benchmark Model"""
 
@@ -114,7 +114,7 @@ def stackedLSTM():
     model_lstm.compile(loss='mean_squared_error', optimizer='adam')
     early_stop = EarlyStopping(monitor='loss', patience=5, verbose=1)
     history_model_lstm = model_lstm.fit(
-        X_tr_t, y_train, epochs=200, batch_size=8, verbose=1, shuffle=False, callbacks=[early_stop])
+        X_tr_t, y_train, epochs=10, batch_size=8, verbose=1, shuffle=False, callbacks=[early_stop])
 
     """# Evaluation of Model"""
 
@@ -133,32 +133,34 @@ def stackedLSTM():
 
     """# LSTM's Prediction Visual"""
 
-    # plt.plot(y_test, label='True')
-    # plt.plot(y_pred_test_LSTM, label='LSTM')
-    # plt.title("LSTM's_Prediction")
-    # plt.xlabel('Observation')
-    # plt.ylabel('INR_Scaled')
-    # plt.legend()
-    # plt.show()
+    plt.plot(y_test, label='True')
+    plt.plot(y_pred_test_LSTM, label='LSTM')
+    plt.title("LSTM's_Prediction")
+    plt.xlabel('Observation')
+    plt.ylabel('INR_Scaled')
+    plt.legend()
+    plt.savefig('./static/graph.png')
 
     return {
-        score_lstm: score_lstm,
-        r2_train: r2_train,
-        r2_test: r2_test,
+        "score_lstm": score_lstm,
+        "r2_train": r2_train,
+        "r2_test": r2_test,
     }
 
 
-def biDirectionalLSTM():
-    df_final = pd.read_csv("CIPLA.csv", na_values=[
+def biDirectionalLSTM(csv):
+    print("BiDirectional LSTM")
+
+    df_final = pd.read_csv(csv, na_values=[
                            'null'], index_col='Date', parse_dates=True, infer_datetime_format=True)
 
-    df_final.head()
+    # df_final.head()
 
-    df_final.shape
+    # df_final.shape
 
-    df_final.describe()
+    # df_final.describe()
 
-    df_final.isnull().values.any()
+    # df_final.isnull().values.any()
 
     test = df_final
     # Target column
@@ -194,13 +196,13 @@ def biDirectionalLSTM():
         y_train, y_test = target_adj_close[:len(train_index)].values.ravel(
         ), target_adj_close[len(train_index): (len(train_index)+len(test_index))].values.ravel()
 
-    X_train.shape
+    # X_train.shape
 
-    X_test.shape
+    # X_test.shape
 
-    y_train.shape
+    # y_train.shape
 
-    y_test.shape
+    # y_test.shape
 
     dt = DecisionTreeRegressor(random_state=0)
 
@@ -227,7 +229,7 @@ def biDirectionalLSTM():
     model_lstm.compile(loss='mean_squared_error', optimizer='adam')
     early_stop = EarlyStopping(monitor='loss', patience=5, verbose=1)
     history_model_lstm = model_lstm.fit(
-        X_tr_t, y_train, epochs=200, batch_size=8, verbose=1, shuffle=False, callbacks=[early_stop])
+        X_tr_t, y_train, epochs=10, batch_size=8, verbose=1, shuffle=False, callbacks=[early_stop])
 
     """# Evaluation of Model"""
 
@@ -246,32 +248,34 @@ def biDirectionalLSTM():
 
     """# LSTM's Prediction Visual"""
 
-    # plt.plot(y_test, label='True')
-    # plt.plot(y_pred_test_LSTM, label='LSTM')
-    # plt.title("LSTM's_Prediction")
-    # plt.xlabel('Observation')
-    # plt.ylabel('INR_Scaled')
-    # plt.legend()
-    # plt.show()
+    plt.plot(y_test, label='True')
+    plt.plot(y_pred_test_LSTM, label='LSTM')
+    plt.title("LSTM's_Prediction")
+    plt.xlabel('Observation')
+    plt.ylabel('INR_Scaled')
+    plt.legend()
+    plt.savefig('./static/graph.png')
 
     return {
-        score_lstm: score_lstm,
-        r2_train: r2_train,
-        r2_test: r2_test,
+        "score_lstm": score_lstm,
+        "r2_train": r2_train,
+        "r2_test": r2_test,
     }
 
 
-def classicLSTM():
-    df_final = pd.read_csv("CIPLA.csv", na_values=[
+def classicLSTM(csv):
+    print("Classic LSTM")
+
+    df_final = pd.read_csv(csv, na_values=[
         'null'], index_col='Date', parse_dates=True, infer_datetime_format=True)
 
-    df_final.head()
+    # df_final.head()
 
-    df_final.shape
+    # df_final.shape
 
-    df_final.describe()
+    # df_final.describe()
 
-    df_final.isnull().values.any()
+    # df_final.isnull().values.any()
 
     test = df_final
     # Target column
@@ -307,13 +311,13 @@ def classicLSTM():
         y_train, y_test = target_adj_close[:len(train_index)].values.ravel(
         ), target_adj_close[len(train_index): (len(train_index)+len(test_index))].values.ravel()
 
-    X_train.shape
+    # X_train.shape
 
-    X_test.shape
+    # X_test.shape
 
-    y_train.shape
+    # y_train.shape
 
-    y_test.shape
+    # y_test.shape
 
     """# Benchmark Model"""
 
@@ -343,7 +347,7 @@ def classicLSTM():
     model_lstm.compile(loss='mean_squared_error', optimizer='adam')
     early_stop = EarlyStopping(monitor='loss', patience=5, verbose=1)
     history_model_lstm = model_lstm.fit(
-        X_tr_t, y_train, epochs=200, batch_size=8, verbose=1, shuffle=False, callbacks=[early_stop])
+        X_tr_t, y_train, epochs=10, batch_size=8, verbose=1, shuffle=False, callbacks=[early_stop])
 
     """# Evaluation of Model"""
 
@@ -362,16 +366,16 @@ def classicLSTM():
 
     """# LSTM's Prediction Visual"""
 
-    # plt.plot(y_test, label='True')
-    # plt.plot(y_pred_test_LSTM, label='LSTM')
-    # plt.title("LSTM's_Prediction")
-    # plt.xlabel('Observation')
-    # plt.ylabel('INR_Scaled')
-    # plt.legend()
-    # plt.show()
+    plt.plot(y_test, label='True')
+    plt.plot(y_pred_test_LSTM, label='LSTM')
+    plt.title("LSTM's_Prediction")
+    plt.xlabel('Observation')
+    plt.ylabel('INR_Scaled')
+    plt.legend()
+    plt.savefig('./static/graph.png')
 
     return {
-        score_lstm: score_lstm,
-        r2_train: r2_train,
-        r2_test: r2_test,
+        "score_lstm": score_lstm,
+        "r2_train": r2_train,
+        "r2_test": r2_test,
     }
