@@ -110,7 +110,7 @@ def stackedLSTM(csv, feature_columns):
     model_lstm.add(LSTM(16, input_shape=(
         1, X_train.shape[1]), activation='relu', return_sequences=True))
     model_lstm.add(LSTM(16, activation='relu', return_sequences=False))
-    model_lstm.add(Dense(1))
+    model_lstm.add(Dense(1, activation='relu'))
     model_lstm.compile(loss='mean_squared_error', optimizer='adam')
     early_stop = EarlyStopping(monitor='loss', patience=5, verbose=1)
     history_model_lstm = model_lstm.fit(
@@ -212,8 +212,8 @@ def biDirectionalLSTM(csv, feature_columns):
     K.clear_session()
     model_lstm = Sequential()
     model_lstm.add(Bidirectional(LSTM(16, input_shape=(
-        1, X_train.shape[1]), activation='relu', return_sequences=False), input_shape=(1, X_train.shape[1])))
-    model_lstm.add(Dense(1))
+        1, X_train.shape[1]), activation='relu', return_sequences=False)))
+    model_lstm.add(Dense(1, activation='relu'))
     model_lstm.compile(loss='mean_squared_error', optimizer='adam')
     early_stop = EarlyStopping(monitor='loss', patience=5, verbose=1)
     history_model_lstm = model_lstm.fit(
@@ -304,7 +304,7 @@ def classicLSTM(csv, feature_columns):
     validate_result(benchmark_dt, 'Decision Tree Regression',
                     validation_X, validation_y)
 
-    """# Process the data for Stacked LSTM"""
+    """# Process the data for Classic LSTM"""
 
     X_train = np.array(X_train)
     X_test = np.array(X_test)
@@ -312,14 +312,13 @@ def classicLSTM(csv, feature_columns):
     X_tr_t = X_train.reshape(X_train.shape[0], 1, X_train.shape[1])
     X_tst_t = X_test.reshape(X_test.shape[0], 1, X_test.shape[1])
 
-    """# Model building : Stacked LSTM"""
+    """# Model building : Classic LSTM"""
 
     K.clear_session()
     model_lstm = Sequential()
     model_lstm.add(LSTM(16, input_shape=(
-        1, X_train.shape[1]), activation='relu', return_sequences=True))
-    model_lstm.add(LSTM(16, activation='relu', return_sequences=False))
-    model_lstm.add(Dense(1))
+        1, X_train.shape[1]), activation='relu', return_sequences=False))
+    model_lstm.add(Dense(1, activation='relu'))
     model_lstm.compile(loss='mean_squared_error', optimizer='adam')
     early_stop = EarlyStopping(monitor='loss', patience=5, verbose=1)
     history_model_lstm = model_lstm.fit(
