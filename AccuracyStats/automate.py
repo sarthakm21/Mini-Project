@@ -3,7 +3,7 @@ from funcs import stackedLSTM, biDirectionalLSTM, classicLSTM
 import json
 
 features = ['Open', 'High', 'Low', 'Close', 'Volume']
-stockName = "HDFCBANK"
+stockName = "SBIN"
 result = {}
 
 def featuresetToString(featureset):
