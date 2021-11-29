@@ -16,7 +16,7 @@ for L in range(0, len(features)+1):
             continue
         print(featureset)
         with open(f'../dataset/{stockName}.csv', mode='r') as csv_file:
-            res = stackedLSTM(csv_file, featureset)
+            res = classicLSTM(csv_file, featureset)
             result[featuresetToString(featureset)] = res['r2_test']
         with open(f'{stockName}classicResults.json', 'w+') as f:
             json.dump(result, f, indent=4)
