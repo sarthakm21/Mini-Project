@@ -1,0 +1,62 @@
+[
+    {
+      "Features": "Open, Volume",
+      "Classic LSTM": 0.03252,
+      "Stacked LSTM": 0.02609,
+      "Bidirectional LSTM": 0.03609
+    },
+    {
+      "Features": "Low, Close",
+      "Classic LSTM": 0.01682,
+      "Stacked LSTM": 0.01896,
+      "Bidirectional LSTM": 0.01418
+    },
+    {
+      "Features": "Low, Volume",
+      "Classic LSTM": 0.02798,
+      "Stacked LSTM": 0.02728,
+      "Bidirectional LSTM": 0.02555
+    },
+    {
+      "Features": "Open, High, Low",
+      "Classic LSTM": 0.0147,
+      "Stacked LSTM": 0.01965,
+      "Bidirectional LSTM": 0.01506
+    },
+    {
+      "Features": "Open, Close, Volume",
+      "Classic LSTM": 0.01601,
+      "Stacked LSTM": 0.01889,
+      "Bidirectional LSTM": 0.01615
+    },
+    {
+      "Features": "High, Low, Close",
+      "Classic LSTM": 0.01305,
+      "Stacked LSTM": 0.01737,
+      "Bidirectional LSTM": 0.01235
+    },
+    {
+      "Features": "Low, Close, Volume",
+      "Classic LSTM": 0.01635,
+      "Stacked LSTM": 0.01849,
+      "Bidirectional LSTM": 0.01518
+    },
+    {
+      "Features": "Open, High, Close, Volume",
+      "Classic LSTM": 0.0149,
+      "Stacked LSTM": 0.01795,
+      "Bidirectional LSTM": 0.01545
+    },
+    {
+      "Features": "High, Low, Close, Volume",
+      "Classic LSTM": 0.01377,
+      "Stacked LSTM": 0.0137,
+      "Bidirectional LSTM": 0.01319
+    },
+    {
+      "Features": "Open, High, Low, Close, Volume",
+      "Classic LSTM": 0.01371,
+      "Stacked LSTM": 0.01589,
+      "Bidirectional LSTM": 0.01338
+    }
+  ]
