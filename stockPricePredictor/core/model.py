@@ -115,7 +115,7 @@ def stackedLSTM(csv, feature_columns):
     model_lstm.compile(loss='mean_squared_error', optimizer='adam')
     early_stop = EarlyStopping(monitor='loss', patience=5, verbose=1)
     history_model_lstm = model_lstm.fit(
-        X_tr_t, y_train, epochs=20, batch_size=8, verbose=1, shuffle=False, callbacks=[early_stop])
+        X_tr_t, y_train, epochs=200, batch_size=8, verbose=1, shuffle=False, callbacks=[early_stop])
 
     """# Evaluation of Model"""
 
@@ -230,7 +230,7 @@ def biDirectionalLSTM(csv, feature_columns):
     model_lstm.compile(loss='mean_squared_error', optimizer='adam')
     early_stop = EarlyStopping(monitor='loss', patience=5, verbose=1)
     history_model_lstm = model_lstm.fit(
-        X_tr_t, y_train, epochs=20, batch_size=8, verbose=1, shuffle=False, callbacks=[early_stop])
+        X_tr_t, y_train, epochs=200, batch_size=8, verbose=1, shuffle=False, callbacks=[early_stop])
 
     """# Evaluation of Model"""
 
@@ -347,7 +347,7 @@ def classicLSTM(csv, feature_columns):
     model_lstm.compile(loss='mean_squared_error', optimizer='adam')
     early_stop = EarlyStopping(monitor='loss', patience=5, verbose=1)
     history_model_lstm = model_lstm.fit(
-        X_tr_t, y_train, epochs=20, batch_size=8, verbose=1, shuffle=False, callbacks=[early_stop])
+        X_tr_t, y_train, epochs=200, batch_size=8, verbose=1, shuffle=False, callbacks=[early_stop])
 
     """# Evaluation of Model"""
 
