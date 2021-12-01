@@ -21,7 +21,7 @@ from core.views import getResults
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('results/', getResults),
+    path('', getResults),
 ]
 
 urlpatterns += staticfiles_urlpatterns()

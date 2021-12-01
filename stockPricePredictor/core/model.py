@@ -15,6 +15,7 @@ import keras.backend as K
 from sklearn.tree import DecisionTreeRegressor
 from sklearn import linear_model
 
+
 def validate_result(model, model_name, validation_X, validation_y):
     predicted = model.predict(validation_X)
     RSME_score = np.sqrt(mean_squared_error(validation_y, predicted))
@@ -114,7 +115,7 @@ def stackedLSTM(csv, feature_columns):
     model_lstm.compile(loss='mean_squared_error', optimizer='adam')
     early_stop = EarlyStopping(monitor='loss', patience=5, verbose=1)
     history_model_lstm = model_lstm.fit(
-        X_tr_t, y_train, epochs=10, batch_size=8, verbose=1, shuffle=False, callbacks=[early_stop])
+        X_tr_t, y_train, epochs=20, batch_size=8, verbose=1, shuffle=False, callbacks=[early_stop])
 
     """# Evaluation of Model"""
 
@@ -229,7 +230,7 @@ def biDirectionalLSTM(csv, feature_columns):
     model_lstm.compile(loss='mean_squared_error', optimizer='adam')
     early_stop = EarlyStopping(monitor='loss', patience=5, verbose=1)
     history_model_lstm = model_lstm.fit(
-        X_tr_t, y_train, epochs=10, batch_size=8, verbose=1, shuffle=False, callbacks=[early_stop])
+        X_tr_t, y_train, epochs=20, batch_size=8, verbose=1, shuffle=False, callbacks=[early_stop])
 
     """# Evaluation of Model"""
 
@@ -346,7 +347,7 @@ def classicLSTM(csv, feature_columns):
     model_lstm.compile(loss='mean_squared_error', optimizer='adam')
     early_stop = EarlyStopping(monitor='loss', patience=5, verbose=1)
     history_model_lstm = model_lstm.fit(
-        X_tr_t, y_train, epochs=10, batch_size=8, verbose=1, shuffle=False, callbacks=[early_stop])
+        X_tr_t, y_train, epochs=20, batch_size=8, verbose=1, shuffle=False, callbacks=[early_stop])
 
     """# Evaluation of Model"""
 
