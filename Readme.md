@@ -1,8 +1,6 @@
-
-
-How to run:
+How to run web application:
 ```
-cd stockPricePredictor
+cd web-app
 
 python3 -m venv env
 
@@ -12,5 +10,7 @@ pip install -r requirements.txt
 
 python3 manage.py runserver
 
-goto: http://127.0.0.1:8000/results/
+goto: http://127.0.0.1:8000/
 ```
+
+Find Python notebooks in `python-notebook` folder
