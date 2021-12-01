@@ -33,8 +33,7 @@
                 </a>
                 <nav id="navbar" class="navbar">
                     <ul>
-                        <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-                        <li><a class="getstarted scrollto" href="#about">Get Started</a></li>
+                        <li><a class="getstarted scrollto" href="#form-section">Get Started</a></li>
                     </ul>
                     <i class="bi bi-list mobile-nav-toggle"></i>
                 </nav>
@@ -53,7 +52,7 @@
                         </h2>
                         <div data-aos="fade-up" data-aos-delay="600">
                             <div class="text-center text-lg-start">
-                                <a href=""
+                                <a href="#form-section"
                                     class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
                                     <span>Get Started</span>
                                     <i class="fa fa-arrow-right" aria-hidden="true"></i>
@@ -120,7 +119,7 @@
 
         </section>
 
-        <div class="row justify-content-center m-4">
+        <div class="row justify-content-center m-4" id="form-section">
             <header class="section-header">
                 <h2> Description</h2>
                 <p class="w-75 mx-auto"> Select CSV file, LSTM Variant and features to generate graph for predicted
@@ -170,18 +169,28 @@
                 <div class="d-flex justify-content-center mb-2">
                     <h3>Result</h3>
                 </div>
-                <div class="result d-flex flex-row justify-content-between">
-                    <div>
-                        "score_lstm": {{score_lstm}},
-                    </div>
-                    <div>
-                        "r2_train": {{r2_train}},
-                    </div>
-                    <div>
-                        "r2_test": {{r2_test}}
-                    </div>
-                </div>
                 <div>
+                    <style>
+                        tbody, td, tfoot, th, thead, tr{
+                            border: 1px solid black;
+                            height: 30px;
+                        }
+                    </style>
+                    <table style="width: 100%;text-align: center;border: 1px solid black;">
+                        <tr>
+                            <th>Score LSTM</th>
+                            <th>R2 Train</th>
+                            <th>R2 Test</th>
+                        </tr>
+                        <tr>
+                            <td>{{score_lstm}}</td>
+                            <td>{{r2_train}}</td>
+                            <td>{{r2_train}}</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div style="text-align: center;">
                     <img src="{% static 'graph.png' %}" height="500" width="800" class="graph_generated">
                 </div>
             </div>
